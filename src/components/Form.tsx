@@ -2,7 +2,6 @@ import { IonItem, IonList, IonInput, IonButton } from "@ionic/react";
 import { maskitoNumberOptionsGenerator } from "@maskito/kit";
 import { useMaskito } from "@maskito/react";
 import { Controller, useForm } from "react-hook-form";
-import { MaskedInput } from "./MaskedInput";
 
 interface FormFields {
   pressure: number;
@@ -13,7 +12,7 @@ const NegativeInputForm: React.FC = () => {
     handleSubmit,
     control,
     formState: { isValid },
-  } = useForm<FormFields>({ mode: "onChange" });
+  } = useForm<FormFields>();
 
   const options = maskitoNumberOptionsGenerator({
     precision: 4,
@@ -32,21 +31,25 @@ const NegativeInputForm: React.FC = () => {
             <IonInput
               label="Pressure"
               labelPlacement="floating"
-              ref={async (ref) => {
+              ref={(ref) => {
                 if (ref) {
-                  const input = await ref.getInputElement();
-                  mask(input);
+                  requestAnimationFrame(async () => {
+                    const input = await ref.getInputElement();
+                    if (input) {
+                      mask(input);
+                    }
+                  });
                 }
               }}
+              inputMode="tel"
               value={value}
               onIonBlur={onBlur}
-              onIonChange={(e) => onChange(e.detail.value!)}
+              onIonInput={(e) => onChange(e.detail.value!)}
             />
           )}
           rules={{ required: true }}
         />
       </IonItem>
-      <MaskedInput />
       <IonButton
         expand="full"
         disabled={!isValid}
