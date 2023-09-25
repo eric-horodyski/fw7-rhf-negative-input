@@ -8,17 +8,17 @@ interface FormFields {
   pressure: number;
 }
 
-const options = maskitoNumberOptionsGenerator({
-  precision: 4,
-  min: -10000000,
-});
-
 const NegativeInputForm: React.FC = () => {
   const {
     handleSubmit,
     control,
     formState: { isValid },
   } = useForm<FormFields>({ mode: "onChange" });
+
+  const options = maskitoNumberOptionsGenerator({
+    precision: 4,
+    min: -10000000,
+  });
 
   const mask = useMaskito({ options });
 
@@ -32,14 +32,12 @@ const NegativeInputForm: React.FC = () => {
             <IonInput
               label="Pressure"
               labelPlacement="floating"
-              type="number"
               ref={async (ref) => {
                 if (ref) {
                   const input = await ref.getInputElement();
                   mask(input);
                 }
               }}
-              inputMode="tel"
               value={value}
               onIonBlur={onBlur}
               onIonChange={(e) => onChange(e.detail.value!)}

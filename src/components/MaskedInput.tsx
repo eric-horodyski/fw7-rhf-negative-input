@@ -2,12 +2,11 @@ import { IonInput } from "@ionic/react";
 import { maskitoNumberOptionsGenerator } from "@maskito/kit";
 import { useMaskito } from "@maskito/react";
 
-const options = maskitoNumberOptionsGenerator({
-  precision: 4,
-  min: -10000000,
-});
-
 export const MaskedInput = () => {
+  const options = maskitoNumberOptionsGenerator({
+    precision: 4,
+    min: -10000000,
+  });
   const mask = useMaskito({ options });
 
   return (
@@ -19,7 +18,6 @@ export const MaskedInput = () => {
         }
       }}
       label="Without RHF"
-      type="text"
     />
   );
 };
