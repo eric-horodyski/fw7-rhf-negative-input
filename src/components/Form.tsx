@@ -2,6 +2,7 @@ import { IonItem, IonList, IonInput, IonButton } from "@ionic/react";
 import { maskitoNumberOptionsGenerator } from "@maskito/kit";
 import { useMaskito } from "@maskito/react";
 import { Controller, useForm } from "react-hook-form";
+import { MaskedInput } from "./MaskedInput";
 
 interface FormFields {
   pressure: number;
@@ -47,6 +48,7 @@ const NegativeInputForm: React.FC = () => {
           rules={{ required: true }}
         />
       </IonItem>
+      <MaskedInput />
       <IonButton
         expand="full"
         disabled={!isValid}
