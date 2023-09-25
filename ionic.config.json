@@ -1,0 +1,7 @@
+{
+  "name": "fw7-rhf-negative-input",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
